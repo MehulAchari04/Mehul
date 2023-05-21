@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>MealMovers</title>
+  </head>
+  <body>
+    <div class="signup-box">
+      <h1>SignUp</h1>
+      <div class="Move-btn">
+        <a href="index.html" class="Back-btn">
+          <button class="Bot">Back</button>
+        </a>
+      </div>
+      <br />
+      <form>
+        <div class="User-Input">
+          <input
+            class="input-box"
+            type="text"
+            name="contactNameUser"
+            placeholder=" Full Name"
+          />
+          <div class="error-msg hidden" id="contact-name-error">
+            Kindly Enter Your Name
+          </div>
+        </div>
+        <br />
+        <div class="User-Input">
+          <input
+            class="input-box"
+            type="text"
+            name="profileEmail"
+            placeholder=" Email"
+          />
+          <div class="error-msg hidden" id="email-error">
+            Kindly Enter Email ID
+          </div>
+          <div class="error-msg hidden" id="invalid-email-error">
+            Please enter a valid email
+          </div>
+        </div>
+        <br />
+        <input type="checkbox" />
+        I agree to MealMovers Terms of Service, Privacy Policy and Content
+        Policies.<br /><br />
+        <input class="CreateBtn" type="submit" value="Create Account" />
+      </form>
+
+      <p>
+        Already have an account?
+        <a href="Login2.html" class="Loginlink">Login</a>
+      </p>
+    </div>
+    <style>
+      body {
+        background-color: #e3dedd;
+        font-family: "Nunito", sans-serif;
+      }
+      .Back-btn {
+        text-decoration: none;
+      }
+      .Bot {
+        width: 50px;
+        height: 20px;
+        background-color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: crimson;
+        color: white;
+        font-weight: bold;
+        float: right;
+      }
+      .Move-btn {
+        display: flex;
+        margin-top: -28px;
+        float: right;
+      }
+      .signup-box {
+        margin: auto;
+        background-color: white;
+        border-radius: 7px;
+        width: 550px;
+        height: 500px;
+        margin-top: 100px;
+        padding: 20px;
+      }
+      .input-box {
+        width: 100%;
+        height: 33px;
+        border-radius: 3px;
+      }
+      .CreateBtn {
+        width: 100%;
+        height: 33px;
+        border-radius: 3px;
+        background-color: crimson;
+        color: white;
+        font-family: "Nunito", sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .Loginlink {
+        text-decoration: none;
+        color: crimson;
+        font-weight: bold;
+      }
+
+      .error-msg {
+        margin-top: 8px;
+        color: crimson;
+        font-family: "Nunito", sans-serif;
+        font-weight: bold;
+        width: 200px;
+        background: rgba(255, 0, 0, 0.1);
+        padding: 5px 8px;
+        border-radius: 3px;
+        border: 1px solid #ef9a9a;
+      }
+      .hidden {
+        display: none;
+      }
+      input.invalid {
+        border: 1px solid crimson !important;
+      }
+    </style>
+    <script>
+      const form = document.querySelector("form");
+      const contactNameInput = document.querySelector(
+        'input[name="contactNameUser"]'
+      );
+      const contactEmailProfileInput = document.querySelector(
+        'input[name="profileEmail"]'
+      );
+      const validRegex =
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+      const validateInputs = () => {
+        if (!contactNameInput.value) {
+          document.getElementById("contact-name-error").style.display = "block"; //Block = Show
+          contactNameInput.classList.add("invalid"); //invalid refers to red border of input box
+        } else {
+          document.getElementById("contact-name-error").style.display = "none"; //none = hide
+          contactNameInput.classList.remove("invalid");
+        }
+        if (!contactEmailProfileInput.value) {
+          document.getElementById("email-error").style.display = "block";
+          document.getElementById("invalid-email-error").style.display = "none";
+          contactEmailProfileInput.classList.add("invalid");
+        } else if (contactEmailProfileInput.value.match(validRegex)) {
+          document.getElementById("email-error").style.display = "none";
+          document.getElementById("invalid-email-error").style.display = "none";
+          contactEmailProfileInput.classList.remove("invalid");
+        } else if (contactEmailProfileInput.value) {
+          document.getElementById("email-error").style.display = "none";
+          document.getElementById("invalid-email-error").style.display =
+            "block";
+          contactEmailProfileInput.classList.add("invalid");
+        }
+      };
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        validateInputs();
+      });
+      contactNameInput.addEventListener("input", () => {
+        validateInputs();
+        contactEmailProfileInput.addEventListener("input", () => {
+          validateInputs();
+        });
+      });
+    </script>
+  </body>
+</html>
